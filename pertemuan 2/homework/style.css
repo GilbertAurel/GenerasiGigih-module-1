@@ -19,3 +19,8 @@
   border: 1.5px solid #000;
   background-color: #ffccbd;
 }
+
+.playlist__selection img {
+  height: 300px;
+  object-fit: contain;
+}
