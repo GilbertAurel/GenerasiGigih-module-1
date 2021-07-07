@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <title>Playlist Creator</title>
+</head>
+<body class="playlist">
+    <h1 class="playlist__title">Create Playlist</h1>
+
+    <form onsubmit="return onSubmitFormHandler()" class="playlist__form">
+        <section>
+            <label>title</label>
+            <input type="text" name="" id="">
+        </section>
+        <section>
+            <label>description</label>
+            <input type="text" name="" id="">
+        </section>
+        <button>Submit</button>
+    </form>
+
+    <div class="playlist__selection">
+        <img src="https://picsum.photos/200/300" alt="">
+        <p>Track title</p>
+        <p>Artist</p>
+        <p>Album</p>
+        <button>Select</button>
+    </div>
+
+    <script>
+        function onSubmitFormHandler() {
+            return alert("alert function")
+        }
+
+        fetch("https://gist.githubusercontent.com/aryapradipta9/e6492383477803b233916e01f36d5465/raw/66942c739d66d3774303f84071696aa865a07077/single-sample.json")
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((error) => alert(error))
+    </script>
+</body>
+</html>
