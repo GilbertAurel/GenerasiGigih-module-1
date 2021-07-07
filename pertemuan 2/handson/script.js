@@ -15,11 +15,22 @@ const AvgPromiseHandler = (token) => {
   return new Promise((resolve, reject) => {
     console.log("checking token..");
 
-    if (token === TOKEN_KEY) {
-      resolve("token approved!");
+    if (token !== TOKEN_KEY) {
+      return reject(new Error("401: invalid token!"));
     }
 
-    reject(new Error("There is something wrong!"));
+    setTimeout(() => {
+      console.log("token approved, initiating call..");
+      return setTimeout(
+        () =>
+          resolve({
+            res: 200,
+            status: "OK",
+            message: { data: averageAge },
+          }),
+        3000
+      );
+    }, 2000);
   });
 };
 
@@ -44,24 +55,12 @@ const averageAge = totalAge / USER_DATA.length;
 const button = document.querySelector("button");
 button.onclick = () => {
   AvgPromiseHandler("HELLO")
-    .then((res) => {
-      return new Promise((resolve) => {
-        console.log(res);
-        console.log("first call started");
-        setTimeout(() => resolve("call finished"), 2000);
-      });
+    .then((data) => {
+      const { res, status, message } = data;
+      console.log(`${res}: ${status}`);
+      console.log(`avg age: ${message.data}`);
     })
-    .then((res) => {
-      return new Promise((resolve) => {
-        console.log(res);
-        console.log("second call started");
-        setTimeout(() => resolve("call finished"), 3000);
-      });
-    })
-    .then((res) => {
-      console.log(res);
-      console.log(averageAge);
-      result.innerText = `Avg: ${averageAge}`;
-    })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+    });
 };
