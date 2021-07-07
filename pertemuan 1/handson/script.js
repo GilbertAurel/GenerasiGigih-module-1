@@ -11,7 +11,7 @@ let totalAge = 0;
 // Set user table data
 const table = document.getElementById("user-table");
 
-USER_DATA.map((user) => {
+USER_DATA.forEach((user) => {
   const name = document.createElement("p");
   const age = document.createElement("p");
 
