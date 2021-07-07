@@ -4,8 +4,8 @@ const USER_DATA = [
   { name: "Norris" },
 ];
 const INIT_AGE = 20;
-let totalAge = 0;
 let TOKEN_KEY = "HELLO";
+let totalAge = 0;
 
 const table = document.getElementById("user-table");
 const result = document.getElementById("result");
@@ -19,6 +19,9 @@ const AvgPromiseHandler = (token) => {
       return reject(new Error("401: invalid token!"));
     }
 
+    // Calculate avg age
+    const averageAge = totalAge / USER_DATA.length;
+
     setTimeout(() => {
       console.log("token approved, initiating call..");
       return setTimeout(
@@ -26,7 +29,7 @@ const AvgPromiseHandler = (token) => {
           resolve({
             res: 200,
             status: "OK",
-            message: { data: averageAge },
+            message: { avgAge: averageAge },
           }),
         3000
       );
@@ -48,9 +51,6 @@ USER_DATA.forEach((user) => {
   totalAge += user.age ? user.age : INIT_AGE;
 });
 
-// Get user age summmary
-const averageAge = totalAge / USER_DATA.length;
-
 // Click button handler
 const button = document.querySelector("button");
 button.onclick = () => {
@@ -58,7 +58,8 @@ button.onclick = () => {
     .then((data) => {
       const { res, status, message } = data;
       console.log(`${res}: ${status}`);
-      console.log(`avg age: ${message.data}`);
+      console.log(`avg age: ${message.avgAge}`);
+      result.innerText = `Avg: ${message.avgAge}`;
     })
     .catch((error) => {
       console.log(error);
