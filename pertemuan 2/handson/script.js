@@ -10,7 +10,7 @@ let totalAge = 0;
 const table = document.getElementById("user-table");
 const result = document.getElementById("result");
 
-// Avg promise
+// Avg promise: imitate api calling function
 const AvgPromiseHandler = (token) => {
   return new Promise((resolve, reject) => {
     console.log("checking token..");
