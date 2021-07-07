@@ -1,6 +1,6 @@
-const title = document.getElementById("title");
-const artist = document.getElementById("artist");
-const album = document.getElementById("album");
+const titleText = document.getElementById("title");
+const artistText = document.getElementById("artist");
+const albumText = document.getElementById("album");
 const image = document.querySelector("img");
 
 function onSubmitFormHandler() {
@@ -13,12 +13,11 @@ fetch(
   .then((res) => res.json())
   .then((data) => {
     console.log(data);
-
     const { name, album, artists } = data;
 
-    title.innerText = name;
-    album.innerText = album.name;
-    artist.innerText = artists.map((artist) => `${artist.name} `);
+    titleText.innerText = name;
+    artistText.innerText = artists.map((artist) => `${artist.name} `);
+    albumText.innerText = album.name;
     image.src = album.images[0].url;
   })
   .catch((error) => alert(error));
